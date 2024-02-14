@@ -1,41 +1,24 @@
 import * as THREE from "three";
 
-console.log(THREE);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
 
-// 场景 scene
+const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
+camera.position.set( 0, 0, 100 );
+camera.lookAt( 0, 0, 0 );
+
 const scene = new THREE.Scene();
 
-// object
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-const mesh = new THREE.Mesh(geometry, material);
+const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
 
-scene.add(mesh);
+const points = [];
+points.push( new THREE.Vector3( - 10, 0, 0 ) );
+points.push( new THREE.Vector3( 0, 10, 0 ) );
+points.push( new THREE.Vector3( 10, 0, 0 ) );
 
-const sizes = {
-  width: 800,
-  height: 600,
-};
+const geometry = new THREE.BufferGeometry().setFromPoints( points );
+const line = new THREE.Line( geometry, material );
 
-// Camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
-camera.position.z = 5;
-scene.add(camera);
-
-const canvas = document.querySelector("canvas.webgl");
-
-const renderer = new THREE.WebGLRenderer({ canvas: canvas });
-renderer.setSize(sizes.width, sizes.height);
-
-renderer.render(scene, camera);
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  mesh.rotation.x += 0.01;
-  mesh.rotation.y += 0.01;
-
-  renderer.render(scene, camera);
-}
-
-animate();
+scene.add( line );
+renderer.render( scene, camera );
