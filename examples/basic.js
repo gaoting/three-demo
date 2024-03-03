@@ -9,7 +9,7 @@ const scene = new THREE.Scene();
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 const mesh = new THREE.Mesh(geometry, material);
-
+mesh.position.set(1, 1, 1);
 scene.add(mesh);
 
 const sizes = {
@@ -18,7 +18,7 @@ const sizes = {
 };
 
 // Camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height,1,3000);
 camera.position.z = 5;
 scene.add(camera);
 
