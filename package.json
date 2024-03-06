@@ -11,6 +11,8 @@
   "author": "smile",
   "license": "ISC",
   "dependencies": {
+    "@types/dat.gui": "^0.7.12",
+    "dat.gui": "^0.7.9",
     "three": "^0.161.0"
   },
   "devDependencies": {
